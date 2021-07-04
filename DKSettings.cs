@@ -2,7 +2,7 @@
 
 namespace DreamKing
 {
-    public class DKSaveSettings : ModSettings
+    public class DKSaveSettings
     {
         // Start Mod Quest
         public bool SfGrenadeDreamKingStartQuest = false;
@@ -21,7 +21,7 @@ namespace DreamKing
         public bool SfGrenadeDreamKingVisitedWhiteWastes = false;
     }
 
-    public class DKGlobalSettings : ModSettings
+    public class DKGlobalSettings
     {
     }
 }

@@ -4,15 +4,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using DreamKing.Consts;
-using DreamKing.Utils;
 using UnityEngine;
 using GlobalEnums;
 using On;
 using Logger = Modding.Logger;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
-using ModCommon.Util;
 using HutongGames.PlayMaker.Actions;
+using SFCore.Utils;
 
 namespace DreamKing
 {
@@ -144,9 +143,9 @@ namespace DreamKing
 
             // Apply all the stored values
             stats = newItemObj.GetComponent<ShopItemStats>();
-            stats.playerDataBoolName = nameof(dreamKing.Settings.SfGrenadeDreamKingShopShovel1);
-            stats.nameConvo = LanguageStrings.Shovel1Name_Key;
-            stats.descConvo = LanguageStrings.Shovel1Desc_Key;
+            stats.playerDataBoolName = "SfGrenadeDreamKingShopShovel1";
+            stats.nameConvo = Consts.LanguageStrings.Shovel1Name_Key;
+            stats.descConvo = Consts.LanguageStrings.Shovel1Desc_Key;
             stats.requiredPlayerDataBool = "";
             stats.removalPlayerDataBool = "";
             stats.dungDiscount = false;
@@ -173,9 +172,9 @@ namespace DreamKing
 
             // Apply all the stored values
             stats = newItemObj.GetComponent<ShopItemStats>();
-            stats.playerDataBoolName = nameof(dreamKing.Settings.SfGrenadeDreamKingShopShovel2);
-            stats.nameConvo = LanguageStrings.Shovel2Name_Key;
-            stats.descConvo = LanguageStrings.Shovel2Desc_Key;
+            stats.playerDataBoolName = "SfGrenadeDreamKingShopShovel2";
+            stats.nameConvo = Consts.LanguageStrings.Shovel2Name_Key;
+            stats.descConvo = Consts.LanguageStrings.Shovel2Desc_Key;
             stats.requiredPlayerDataBool = "";
             stats.removalPlayerDataBool = "";
             stats.dungDiscount = false;
@@ -227,12 +226,12 @@ namespace DreamKing
 
             Log("CR_Change_Deepnest_East_12()");
 
-            if (DreamKing.Instance.Settings.SfGrenadeDreamKingBoughtShovel1 || DreamKing.Instance.Settings.SfGrenadeDreamKingBoughtShovel2)
+            if (DreamKing.Instance._saveSettings.SfGrenadeDreamKingBoughtShovel1 || DreamKing.Instance._saveSettings.SfGrenadeDreamKingBoughtShovel2)
             {
                 GameObject blizzardWall = scene.Find("blizzard_wall");
                 GameObject.Destroy(blizzardWall.transform.Find("Block").gameObject);
 
-                CreateBreakableWall(scene.name, "SF_DK_Breakable_Wall_DK", new Vector3(112.8521f, 12.94972f, 0.44f), Vector3.zero, Vector3.one, new Vector2(5.394047f, 6.216965f), nameof(DreamKing.Instance.Settings.SfGrenadeDreamKingOpenedAshGrave));
+                CreateBreakableWall(scene.name, "SF_DK_Breakable_Wall_DK", new Vector3(112.8521f, 12.94972f, 0.44f), Vector3.zero, Vector3.one, new Vector2(5.394047f, 6.216965f), nameof(DreamKing.Instance._saveSettings.SfGrenadeDreamKingOpenedAshGrave));
             }
             Log("CR_Change_Deepnest_East_12 Done");
         }
@@ -329,11 +328,11 @@ namespace DreamKing
                 atcFsm.FsmVariables.GetFsmBool("Display Right").Value = false;
                 atcFsm.FsmVariables.GetFsmBool("Only On Revisit").Value = false;
                 atcFsm.FsmVariables.GetFsmBool("Sub Area").Value = false;
-                atcFsm.FsmVariables.GetFsmBool("Visited Area").Value = DreamKing.Instance.Settings.SfGrenadeDreamKingVisitedWhiteWastes;
+                atcFsm.FsmVariables.GetFsmBool("Visited Area").Value = DreamKing.Instance._saveSettings.SfGrenadeDreamKingVisitedWhiteWastes;
                 atcFsm.FsmVariables.GetFsmBool("Wait for Trigger").Value = false;
 
-                atcFsm.FsmVariables.GetFsmString("Area Event").Value = LanguageStrings.WwAreaTitle_Event;
-                atcFsm.FsmVariables.GetFsmString("Visited Bool").Value = nameof(DreamKing.Instance.Settings.SfGrenadeDreamKingVisitedWhiteWastes);
+                atcFsm.FsmVariables.GetFsmString("Area Event").Value = Consts.LanguageStrings.WwAreaTitle_Event;
+                atcFsm.FsmVariables.GetFsmString("Visited Bool").Value = nameof(DreamKing.Instance._saveSettings.SfGrenadeDreamKingVisitedWhiteWastes);
 
                 atcFsm.FsmVariables.GetFsmGameObject("Area Title").Value = GameObject.Find("Area Title");
 
@@ -341,7 +340,7 @@ namespace DreamKing
 
                 atc.AddComponent<NonBouncer>();
 
-                DreamKing.Instance.Settings.SfGrenadeDreamKingVisitedWhiteWastes = true;
+                DreamKing.Instance._saveSettings.SfGrenadeDreamKingVisitedWhiteWastes = true;
             }
             #endregion
 
@@ -520,18 +519,18 @@ namespace DreamKing
             {
                 var apb = scene.FindRoot("Audio Player Blizzard");
                 var apbFsm = apb.LocateMyFSM("Play");
-                apbFsm.GetAction<PlayerDataBoolTest>("State 1", 0).boolName = nameof(DreamKing.Instance.Settings.SfGrenadeDreamKingOwnOutskirtsBlizzard);
+                apbFsm.GetAction<PlayerDataBoolTest>("State 1", 0).boolName = nameof(DreamKing.Instance._saveSettings.SfGrenadeDreamKingOwnOutskirtsBlizzard);
                 apbFsm.SetState("Pause");
 
                 var apbw = scene.FindRoot("Audio Player Blizzard Wyrm");
                 var apbwFsm = apbw.LocateMyFSM("Play");
-                apbwFsm.GetAction<PlayerDataBoolTest>("State 1", 0).boolName = nameof(DreamKing.Instance.Settings.SfGrenadeDreamKingOwnOutskirtsBlizzard);
+                apbwFsm.GetAction<PlayerDataBoolTest>("State 1", 0).boolName = nameof(DreamKing.Instance._saveSettings.SfGrenadeDreamKingOwnOutskirtsBlizzard);
                 apbwFsm.SetState("Pause");
 
                 var wap = scene.FindRoot("white_ash_particles");
                 wap.LocateMyFSM("Control").SendEvent("DRIFT END");
                 var wapFsm = wap.LocateMyFSM("Control2");
-                wapFsm.GetAction<PlayerDataBoolTest>("Init", 3).boolName = nameof(DreamKing.Instance.Settings.SfGrenadeDreamKingOwnOutskirtsBlizzard);
+                wapFsm.GetAction<PlayerDataBoolTest>("Init", 3).boolName = nameof(DreamKing.Instance._saveSettings.SfGrenadeDreamKingOwnOutskirtsBlizzard);
                 wapFsm.SetState("Pause");
 
                 var bs = scene.FindRoot("Battle Scene");
@@ -541,22 +540,22 @@ namespace DreamKing
 
                 var bp = scene.Find("blizzard_particles");
                 var bpFsm = bp.LocateMyFSM("Control");
-                bpFsm.GetAction<PlayerDataBoolTest>("Init", 3).boolName = nameof(DreamKing.Instance.Settings.SfGrenadeDreamKingOwnOutskirtsBlizzard);
+                bpFsm.GetAction<PlayerDataBoolTest>("Init", 3).boolName = nameof(DreamKing.Instance._saveSettings.SfGrenadeDreamKingOwnOutskirtsBlizzard);
                 bpFsm.SetState("Pause");
 
                 var bp1 = scene.Find("blizzard_particles (1)");
                 var bp1Fsm = bp1.LocateMyFSM("Control");
-                bp1Fsm.GetAction<PlayerDataBoolTest>("Init", 3).boolName = nameof(DreamKing.Instance.Settings.SfGrenadeDreamKingOwnOutskirtsBlizzard);
+                bp1Fsm.GetAction<PlayerDataBoolTest>("Init", 3).boolName = nameof(DreamKing.Instance._saveSettings.SfGrenadeDreamKingOwnOutskirtsBlizzard);
                 bp1Fsm.SetState("Pause");
 
                 var bp2 = scene.Find("blizzard_particles (2)");
                 var bp2Fsm = bp2.LocateMyFSM("Control");
-                bp2Fsm.GetAction<PlayerDataBoolTest>("Init", 3).boolName = nameof(DreamKing.Instance.Settings.SfGrenadeDreamKingOwnOutskirtsBlizzard);
+                bp2Fsm.GetAction<PlayerDataBoolTest>("Init", 3).boolName = nameof(DreamKing.Instance._saveSettings.SfGrenadeDreamKingOwnOutskirtsBlizzard);
                 bp2Fsm.SetState("Pause");
 
                 var bp3 = scene.Find("blizzard_particles (3)");
                 var bp3Fsm = bp3.LocateMyFSM("Control");
-                bp3Fsm.GetAction<PlayerDataBoolTest>("Init", 3).boolName = nameof(DreamKing.Instance.Settings.SfGrenadeDreamKingOwnOutskirtsBlizzard);
+                bp3Fsm.GetAction<PlayerDataBoolTest>("Init", 3).boolName = nameof(DreamKing.Instance._saveSettings.SfGrenadeDreamKingOwnOutskirtsBlizzard);
                 bp3Fsm.SetState("Pause");
             }
             else if (scene.name == "Room_Wyrm")
@@ -565,7 +564,7 @@ namespace DreamKing
                 scene.FindRoot("Audio Rumble Cave In").SetActive(false);
                 scene.FindRoot("Avalanche End").SetActive(false);
                 var activateFsm = scene.FindRoot("Avalanche").LocateMyFSM("Activate");
-                activateFsm.GetAction<PlayerDataBoolTest>("Idle", 1).boolName = nameof(DreamKing.Instance.Settings.SfGrenadeDreamKingOwnOutskirtsBlizzard);
+                activateFsm.GetAction<PlayerDataBoolTest>("Idle", 1).boolName = nameof(DreamKing.Instance._saveSettings.SfGrenadeDreamKingOwnOutskirtsBlizzard);
                 activateFsm.SetState("Pause");
                 scene.FindRoot("blizzard_particles").LocateMyFSM("Stop").SetState("Stop");
                 scene.FindRoot("blizzard_particles").SetActive(false);

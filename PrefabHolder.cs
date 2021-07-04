@@ -1,23 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using GlobalEnums;
-using HutongGames.PlayMaker;
-using On;
-using Logger = Modding.Logger;
-using UnityEngine.SceneManagement;
-using UnityEngine.Audio;
-using UnityEngine.Profiling;
-using ModCommon.Util;
-using HutongGames.PlayMaker.Actions;
-using DreamKing.Consts;
-using DreamKing.Utils;
-using UnityEngine.UI;
 using UObject = UnityEngine.Object;
+using SFCore.Utils;
 
 namespace DreamKing
 {

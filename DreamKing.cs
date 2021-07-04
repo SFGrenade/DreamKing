@@ -5,8 +5,6 @@ using System.Collections;
 using System.Collections.Generic;
 using GlobalEnums;
 using Modding;
-using ModCommon;
-using ModCommon.Util;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
@@ -14,6 +12,7 @@ using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
 using System.Security.Cryptography;
 using DreamKing.Consts;
+using SFCore.Generics;
 
 namespace DreamKing
 {
@@ -38,7 +37,7 @@ namespace DreamKing
         MapPin,
         MapMarker
     }
-    public class DreamKing : Mod<DKSaveSettings, DKGlobalSettings>
+    public class DreamKing : FullSettingsMod<DKSaveSettings, DKGlobalSettings>
     {
         internal static DreamKing Instance;
 
@@ -103,7 +102,6 @@ namespace DreamKing
             LangStrings = new LanguageStrings();
             SpriteDict = new TextureStrings();
 
-            SFCore.AchievementHelper.Initialize();
             #region Shop Item Achievements
             SFCore.AchievementHelper.AddAchievement(AchievementStrings.BoughtShovel1_Key, DreamKing.Instance.SpriteDict.Get(TextureStrings.AchievementBoughtShovel1Key), LanguageStrings.Achievement_BoughtShovel1_Title_Key, LanguageStrings.Achievement_BoughtShovel1_Text_Key, false);
             SFCore.AchievementHelper.AddAchievement(AchievementStrings.BoughtShovel2_Key, DreamKing.Instance.SpriteDict.Get(TextureStrings.AchievementBoughtShovel2Key), LanguageStrings.Achievement_BoughtShovel2_Title_Key, LanguageStrings.Achievement_BoughtShovel2_Text_Key, false);
@@ -143,22 +141,6 @@ namespace DreamKing
         {
             // Found in a project, might help saving, don't know, but who cares
             // Save Settings
-            // Start Mod Quest
-            Settings.SfGrenadeDreamKingStartQuest = Settings.SfGrenadeDreamKingStartQuest;
-            if (!Settings.SfGrenadeDreamKingStartQuest)
-                Settings.SfGrenadeDreamKingStartQuest = (PlayerData.instance.royalCharmState == 4);
-            // Shop Items
-            Settings.SfGrenadeDreamKingShopShovel1 = Settings.SfGrenadeDreamKingShopShovel1;
-            Settings.SfGrenadeDreamKingShopShovel2 = Settings.SfGrenadeDreamKingShopShovel2;
-            Settings.SfGrenadeDreamKingBoughtShovel1 = Settings.SfGrenadeDreamKingBoughtShovel1;
-            Settings.SfGrenadeDreamKingBoughtShovel2 = Settings.SfGrenadeDreamKingBoughtShovel2;
-            // Mechanics
-            Settings.SfGrenadeDreamKingOwnOutskirtsBlizzard = Settings.SfGrenadeDreamKingOwnOutskirtsBlizzard;
-            // Bosses
-            Settings.SfGrenadeDreamKingDefeatedPaleWyrm = Settings.SfGrenadeDreamKingDefeatedPaleWyrm;
-            Settings.SfGrenadeDreamKingDefeatedPaleNosk = Settings.SfGrenadeDreamKingDefeatedPaleNosk;
-            // Areas
-            Settings.SfGrenadeDreamKingVisitedWhiteWastes = Settings.SfGrenadeDreamKingVisitedWhiteWastes;
 
             // Inventory Stuff
             initInventory();
@@ -167,50 +149,45 @@ namespace DreamKing
         private void initCallbacks()
         {
             // Hooks
-            ModHooks.Instance.GetPlayerBoolHook += OnGetPlayerBoolHook;
-            ModHooks.Instance.SetPlayerBoolHook += OnSetPlayerBoolHook;
-            ModHooks.Instance.GetPlayerIntHook += OnGetPlayerIntHook;
-            ModHooks.Instance.SetPlayerIntHook += OnSetPlayerIntHook;
-            ModHooks.Instance.AfterSavegameLoadHook += initSaveSettings;
-            ModHooks.Instance.ApplicationQuitHook += SaveDKGlobalSettings;
-            ModHooks.Instance.LanguageGetHook += OnLanguageGetHook;
+            ModHooks.GetPlayerBoolHook += OnGetPlayerBoolHook;
+            ModHooks.SetPlayerBoolHook += OnSetPlayerBoolHook;
+            ModHooks.GetPlayerIntHook += OnGetPlayerIntHook;
+            ModHooks.SetPlayerIntHook += OnSetPlayerIntHook;
+            ModHooks.AfterSavegameLoadHook += initSaveSettings;
+            ModHooks.ApplicationQuitHook += SaveDKGlobalSettings;
+            ModHooks.LanguageGetHook += OnLanguageGetHook;
             UnityEngine.SceneManagement.SceneManager.activeSceneChanged += OnSceneChanged;
         }
 
         private void initInventory()
         {
-            SFCore.ItemHelper.AddOneTwoItem("SF DK Shovel",
-                SpriteDict.Get(TextureStrings.InvShovel1Key), SpriteDict.Get(TextureStrings.InvShovel2Key),
-                nameof(Settings.SfGrenadeDreamKingBoughtShovel1), nameof(Settings.SfGrenadeDreamKingBoughtShovel2),
+            SFCore.ItemHelper.AddOneTwoItem(SpriteDict.Get(TextureStrings.InvShovel1Key), SpriteDict.Get(TextureStrings.InvShovel2Key),
+                nameof(_saveSettings.SfGrenadeDreamKingBoughtShovel1), nameof(_saveSettings.SfGrenadeDreamKingBoughtShovel2),
                 LanguageStrings.Shovel1Name_Key, LanguageStrings.Shovel2Name_Key,
                 LanguageStrings.Shovel1Desc_Key, LanguageStrings.Shovel2Desc_Key);
         }
 
         private void OnSceneChanged(UnityEngine.SceneManagement.Scene from, UnityEngine.SceneManagement.Scene to)
         {
-            // Don't change scene content if quest isn't started
-            if (!Settings.SfGrenadeDreamKingStartQuest)
-                return;
-
             string scene = to.name;
             Log("Scene Changed to: " + scene);
 
-            if (scene == "Room_mapper")
+            if (scene == "Room_mapper" && _saveSettings.SfGrenadeDreamKingStartQuest)
             {
                 // Iselda Shop
                 SceneChanger.CR_Change_Room_Mapper(to, this);
             }
-            else if (scene == "Deepnest_East_12")
+            else if (scene == "Deepnest_East_12" && _saveSettings.SfGrenadeDreamKingShopShovel1)
             {
                 // Room with dust entrance to Deepnest_East_Hornet
                 SceneChanger.CR_Change_Deepnest_East_12(to);
             }
-            else if (scene == "Deepnest_East_Hornet")
+            else if (scene == "Deepnest_East_Hornet" && _saveSettings.SfGrenadeDreamKingShopShovel1)
             {
                 // Hornet 2 Room, entrance to Room_Wyrm
                 SceneChanger.CR_Change_Deepnest_East_Hornet(to);
             }
-            else if (scene == "Room_Wyrm")
+            else if (scene == "Room_Wyrm" && _saveSettings.SfGrenadeDreamKingShopShovel1)
             {
                 // Cast-Off Shell
                 SceneChanger.CR_Change_Room_Wyrm(to);
@@ -235,74 +212,82 @@ namespace DreamKing
 
         #region Get/Set Hooks
 
-        private string OnLanguageGetHook(string key, string sheet)
+        private bool HasSettingsValue<T>(string target)
+        {
+            var tmpField = ReflectionHelper.GetFieldInfo(typeof(DKSaveSettings), target);
+            return tmpField != null && tmpField.FieldType == typeof(T);
+        }
+        private T GetSettingsValue<T>(string target)
+        {
+            return ReflectionHelper.GetField<DKSaveSettings, T>(target);
+        }
+        private void SetSettingsValue<T>(string target, T val)
+        {
+            ReflectionHelper.SetField<DKSaveSettings, T>(target, val);
+        }
+
+        private string OnLanguageGetHook(string key, string sheet, string orig)
         {
             if (LangStrings.ContainsKey(key, sheet))
             {
                 return LangStrings.Get(key, sheet);
             }
-            return Language.Language.GetInternal(key, sheet);
+            return orig;
         }
 
-        private bool OnGetPlayerBoolHook(string target)
+        private bool OnGetPlayerBoolHook(string target, bool orig)
         {
-            var tmpField = Settings.GetType().GetField(target);
-            if (tmpField != null)
+            if (HasSettingsValue<bool>(target))
             {
-                if (!Settings.SfGrenadeDreamKingStartQuest)
-                    Settings.SfGrenadeDreamKingStartQuest = (PlayerData.instance.royalCharmState == 4);
-                return (bool)tmpField.GetValue(Settings);
+                if (!_saveSettings.SfGrenadeDreamKingStartQuest)
+                    _saveSettings.SfGrenadeDreamKingStartQuest = (PlayerData.instance.royalCharmState == 4);
+                return GetSettingsValue<bool>(target);
             }
-            return PlayerData.instance.GetBoolInternal(target);
+            return orig;
         }
 
-        private void OnSetPlayerBoolHook(string target, bool val)
+        private bool OnSetPlayerBoolHook(string target, bool orig)
         {
-            var tmpField = Settings.GetType().GetField(target);
-            if (tmpField != null)
+            if (HasSettingsValue<bool>(target))
             {
-                if (target == nameof(Settings.SfGrenadeDreamKingShopShovel1) && val)
+                if (target == nameof(_saveSettings.SfGrenadeDreamKingShopShovel1) && orig)
                 {
-                    Settings.SfGrenadeDreamKingShopShovel1 = true;
-                    Settings.SfGrenadeDreamKingShopShovel2 = true;
-                    Settings.SfGrenadeDreamKingBoughtShovel1 = true;
+                    _saveSettings.SfGrenadeDreamKingShopShovel1 = true;
+                    _saveSettings.SfGrenadeDreamKingShopShovel2 = true;
+                    _saveSettings.SfGrenadeDreamKingBoughtShovel1 = true;
+                    GameManager.instance.AwardAchievement(AchievementStrings.DefeatedPaleNosk_Key);
                 }
-                else if (target == nameof(Settings.SfGrenadeDreamKingShopShovel2) && val)
+                else if (target == nameof(_saveSettings.SfGrenadeDreamKingShopShovel2) && orig)
                 {
-                    Settings.SfGrenadeDreamKingShopShovel1 = true;
-                    Settings.SfGrenadeDreamKingShopShovel2 = true;
-                    Settings.SfGrenadeDreamKingBoughtShovel2 = true;
+                    _saveSettings.SfGrenadeDreamKingShopShovel1 = true;
+                    _saveSettings.SfGrenadeDreamKingShopShovel2 = true;
+                    _saveSettings.SfGrenadeDreamKingBoughtShovel2 = true;
+                    GameManager.instance.AwardAchievement(AchievementStrings.DefeatedPaleWyrm_Key);
                 }
                 else
                 {
-                    tmpField.SetValue(Settings, val);
+                    SetSettingsValue<bool>(target, orig);
                 }
-                return;
             }
-            PlayerData.instance.SetBoolInternal(target, val);
+            return orig;
         }
 
-        private int OnGetPlayerIntHook(string target)
+        private int OnGetPlayerIntHook(string target, int orig)
         {
-            var tmpField = Settings.GetType().GetField(target);
-            if (tmpField != null)
+            if (HasSettingsValue<int>(target))
             {
-                return (int)tmpField.GetValue(Settings);
+                return GetSettingsValue<int>(target);
             }
-            return PlayerData.instance.GetIntInternal(target);
+            return orig;
         }
 
-        private void OnSetPlayerIntHook(string target, int val)
+        private int OnSetPlayerIntHook(string target, int orig)
         {
-            var tmpField = Settings.GetType().GetField(target);
-            if (tmpField != null)
+            if (HasSettingsValue<int>(target))
             {
-                tmpField.SetValue(Settings, val);
+                SetSettingsValue<int>(target, orig);
             }
-            else
-            {
-                PlayerData.instance.SetIntInternal(target, val);
-            }
+            return orig;
         }
 
         #endregion Get/Set Hooks

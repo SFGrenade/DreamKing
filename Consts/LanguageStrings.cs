@@ -47,7 +47,7 @@ namespace DreamKing.Consts
         public LanguageStrings()
         {
             Assembly asm = Assembly.GetExecutingAssembly();
-            using (Stream s = asm.GetManifestResourceStream("TestOfTeamwork.Resources.Language.json"))
+            using (Stream s = asm.GetManifestResourceStream("DreamKing.Resources.Language.json"))
             {
                 if (s == null) return;
 
