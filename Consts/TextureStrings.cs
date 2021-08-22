@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using UnityEngine;
 
 namespace DreamKing.Consts
@@ -39,12 +36,12 @@ namespace DreamKing.Consts
         private const string AchievementLostDreamsFile = "DreamKing.Resources.Achievement_Lost_Dreams.png";
         #endregion
 
-        private Dictionary<string, Sprite> dict;
+        private Dictionary<string, Sprite> _dict;
 
         public TextureStrings()
         {
             Assembly asm = Assembly.GetExecutingAssembly();
-            dict = new Dictionary<string, Sprite>();
+            _dict = new Dictionary<string, Sprite>();
             var tmpTextures = new Dictionary<string, string>();
             tmpTextures.Add(Shovel1Key, Shovel1File);
             tmpTextures.Add(Shovel2Key, Shovel2File);
@@ -73,7 +70,7 @@ namespace DreamKing.Consts
 
                         // Create sprite from texture
                         // Split is to cut off the DreamKing.Resources. and the .png
-                        dict.Add(pair.Key, Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f)));
+                        _dict.Add(pair.Key, Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f)));
                     }
                 }
             }
@@ -81,7 +78,7 @@ namespace DreamKing.Consts
 
         public Sprite Get(string key)
         {
-            return dict[key];
+            return _dict[key];
         }
     }
 }

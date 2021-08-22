@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using DreamKing.Consts;
+﻿using DreamKing.Consts;
 using UnityEngine;
 
 namespace DreamKing.MonoBehaviours
@@ -10,12 +6,12 @@ namespace DreamKing.MonoBehaviours
     public class PatchDreamExit : MonoBehaviour
     {
         public Vector2 ExitPosition = GameObject.Find("e-xit1").transform.position;
-        public string ToGate = TransitionGateNames.rw_ww01_2;
-        public string ToScene = TransitionGateNames.rWyrm;
+        public string ToGate = TransitionGateNames.RwWw012;
+        public string ToScene = TransitionGateNames.RWyrm;
 
         public void Start()
         {
-            GameObject doorWarp = GameObject.Instantiate(PrefabHolder.wp03Warp);
+            GameObject doorWarp = Instantiate(PrefabHolder.Wp03Warp);
             doorWarp.SetActive(true);
             doorWarp.name = "doorWarp";
             doorWarp.transform.position = ExitPosition;

@@ -1,8 +1,6 @@
-﻿using Modding;
-
-namespace DreamKing
+﻿namespace DreamKing
 {
-    public class DKSaveSettings
+    public class DkSaveSettings
     {
         // Start Mod Quest
         public bool SfGrenadeDreamKingStartQuest = false;
@@ -21,7 +19,7 @@ namespace DreamKing
         public bool SfGrenadeDreamKingVisitedWhiteWastes = false;
     }
 
-    public class DKGlobalSettings
+    public class DkGlobalSettings
     {
     }
 }

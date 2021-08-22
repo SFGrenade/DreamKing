@@ -6,10 +6,8 @@ using System.Reflection;
 using DreamKing.Consts;
 using UnityEngine;
 using GlobalEnums;
-using On;
 using Logger = Modding.Logger;
 using UnityEngine.SceneManagement;
-using UnityEngine.Audio;
 using HutongGames.PlayMaker.Actions;
 using SFCore.Utils;
 
@@ -29,8 +27,8 @@ namespace DreamKing
 
     public class SceneChanger : MonoBehaviour
     {
-        private static bool debug = true;
-        private static string abPath = "E:\\Github_Projects\\DreamKing Assets\\Assets\\AssetBundles\\";
+        private static bool _debug = true;
+        private static string _abPath = "E:\\Github_Projects\\DreamKing Assets\\Assets\\AssetBundles\\";
 
         public AssetBundle AbOverallMat { get; private set; } = null;
         public AssetBundle AbWwScene { get; private set; } = null;
@@ -40,16 +38,16 @@ namespace DreamKing
         {
             On.GameManager.RefreshTilemapInfo += OnGameManagerRefreshTilemapInfo;
 
-            PrefabHolder.preloaded(preloadedObjects);
+            PrefabHolder.Preloaded(preloadedObjects);
 
             #region Load AssetBundles
             Log("Loading AssetBundles");
-            Assembly _asm = Assembly.GetExecutingAssembly();
+            Assembly asm = Assembly.GetExecutingAssembly();
             if (AbOverallMat == null)
             {
-                if (!debug)
+                if (!_debug)
                 {
-                    using (Stream s = _asm.GetManifestResourceStream("DreamKing.Resources.overall_materials_ww"))
+                    using (Stream s = asm.GetManifestResourceStream("DreamKing.Resources.overall_materials_ww"))
                     {
                         if (s != null)
                         {
@@ -59,14 +57,14 @@ namespace DreamKing
                 }
                 else
                 {
-                    AbOverallMat = AssetBundle.LoadFromFile(abPath + "overall_materials_ww");
+                    AbOverallMat = AssetBundle.LoadFromFile(_abPath + "overall_materials_ww");
                 }
             }
             if (AbWwScene == null)
             {
-                if (!debug)
+                if (!_debug)
                 {
-                    using (Stream s = _asm.GetManifestResourceStream("DreamKing.Resources.white_wastes_scenes"))
+                    using (Stream s = asm.GetManifestResourceStream("DreamKing.Resources.white_wastes_scenes"))
                     {
                         if (s != null)
                         {
@@ -76,14 +74,14 @@ namespace DreamKing
                 }
                 else
                 {
-                    AbWwScene = AssetBundle.LoadFromFile(abPath + "white_wastes_scenes");
+                    AbWwScene = AssetBundle.LoadFromFile(_abPath + "white_wastes_scenes");
                 }
             }
             if (AbWwMat == null)
             {
-                if (!debug)
+                if (!_debug)
                 {
-                    using (Stream s = _asm.GetManifestResourceStream("DreamKing.Resources.white_wates_materials"))
+                    using (Stream s = asm.GetManifestResourceStream("DreamKing.Resources.white_wates_materials"))
                     {
                         if (s != null)
                         {
@@ -93,7 +91,7 @@ namespace DreamKing
                 }
                 else
                 {
-                    AbWwMat = AssetBundle.LoadFromFile(abPath + "white_wastes_materials");
+                    AbWwMat = AssetBundle.LoadFromFile(_abPath + "white_wastes_materials");
                 }
             }
             Log("Finished loading AssetBundles");
@@ -103,14 +101,14 @@ namespace DreamKing
         private void OnGameManagerRefreshTilemapInfo(On.GameManager.orig_RefreshTilemapInfo orig, GameManager self, string targetScene)
         {
             orig(self, targetScene);
-            if (targetScene == TransitionGateNames.ww01)
+            if (targetScene == TransitionGateNames.Ww01)
             {
                 self.tilemap.width = 68;
                 self.tilemap.height = 100;
                 self.sceneWidth = 68;
                 self.sceneHeight = 100;
             }
-            else if (targetScene == TransitionGateNames.ww02)
+            else if (targetScene == TransitionGateNames.Ww02)
             {
                 self.tilemap.width = 128;
                 self.tilemap.height = 64;
@@ -128,7 +126,7 @@ namespace DreamKing
             GameObject shopObj = GameObject.Find("Shop Menu");
 
             ShopMenuStock shop = shopObj.GetComponent<ShopMenuStock>();
-            GameObject itemPrefab = UnityEngine.Object.Instantiate(shop.stock[0]);
+            GameObject itemPrefab = Instantiate(shop.stock[0]);
             itemPrefab.SetActive(false);
 
             // List of items from the store
@@ -138,14 +136,14 @@ namespace DreamKing
             ShopItemStats stats;
             #region Shop Item Shovel1
             // Create a new shop item for this item def
-            newItemObj = UnityEngine.Object.Instantiate(itemPrefab);
+            newItemObj = Instantiate(itemPrefab);
             newItemObj.SetActive(false);
 
             // Apply all the stored values
             stats = newItemObj.GetComponent<ShopItemStats>();
             stats.playerDataBoolName = "SfGrenadeDreamKingShopShovel1";
-            stats.nameConvo = Consts.LanguageStrings.Shovel1Name_Key;
-            stats.descConvo = Consts.LanguageStrings.Shovel1Desc_Key;
+            stats.nameConvo = Consts.LanguageStrings.Shovel1NameKey;
+            stats.descConvo = Consts.LanguageStrings.Shovel1DescKey;
             stats.requiredPlayerDataBool = "";
             stats.removalPlayerDataBool = "";
             stats.dungDiscount = false;
@@ -167,14 +165,14 @@ namespace DreamKing
             #endregion
             #region Shop Item Shovel2
             // Create a new shop item for this item def
-            newItemObj = UnityEngine.Object.Instantiate(itemPrefab);
+            newItemObj = Instantiate(itemPrefab);
             newItemObj.SetActive(false);
 
             // Apply all the stored values
             stats = newItemObj.GetComponent<ShopItemStats>();
             stats.playerDataBoolName = "SfGrenadeDreamKingShopShovel2";
-            stats.nameConvo = Consts.LanguageStrings.Shovel2Name_Key;
-            stats.descConvo = Consts.LanguageStrings.Shovel2Desc_Key;
+            stats.nameConvo = Consts.LanguageStrings.Shovel2NameKey;
+            stats.descConvo = Consts.LanguageStrings.Shovel2DescKey;
             stats.requiredPlayerDataBool = "";
             stats.removalPlayerDataBool = "";
             stats.dungDiscount = false;
@@ -226,12 +224,12 @@ namespace DreamKing
 
             Log("CR_Change_Deepnest_East_12()");
 
-            if (DreamKing.Instance._saveSettings.SfGrenadeDreamKingBoughtShovel1 || DreamKing.Instance._saveSettings.SfGrenadeDreamKingBoughtShovel2)
+            if (DreamKing.Instance.SaveSettings.SfGrenadeDreamKingBoughtShovel1 || DreamKing.Instance.SaveSettings.SfGrenadeDreamKingBoughtShovel2)
             {
                 GameObject blizzardWall = scene.Find("blizzard_wall");
-                GameObject.Destroy(blizzardWall.transform.Find("Block").gameObject);
+                Destroy(blizzardWall.transform.Find("Block").gameObject);
 
-                CreateBreakableWall(scene.name, "SF_DK_Breakable_Wall_DK", new Vector3(112.8521f, 12.94972f, 0.44f), Vector3.zero, Vector3.one, new Vector2(5.394047f, 6.216965f), nameof(DreamKing.Instance._saveSettings.SfGrenadeDreamKingOpenedAshGrave));
+                CreateBreakableWall(scene.name, "SF_DK_Breakable_Wall_DK", new Vector3(112.8521f, 12.94972f, 0.44f), Vector3.zero, Vector3.one, new Vector2(5.394047f, 6.216965f), nameof(DreamKing.Instance.SaveSettings.SfGrenadeDreamKingOpenedAshGrave));
             }
             Log("CR_Change_Deepnest_East_12 Done");
         }
@@ -246,7 +244,7 @@ namespace DreamKing
 
             MakeSceneManagerDeepnest03(scene.FindRoot("_SceneManager").GetComponent<SceneManager>());
 
-            GameObject[] tmp = GameObject.FindObjectsOfType<GameObject>();
+            GameObject[] tmp = FindObjectsOfType<GameObject>();
             foreach (var go in tmp)
             {
                 if (!go.activeInHierarchy)
@@ -266,14 +264,14 @@ namespace DreamKing
             Log("CR_Change_Room_Wyrm()");
             //yield return null;
 
-            CreateDreamGateway("Dream Enter", new Vector2(13.0f, 8.0f), new Vector2(5.25f, 5.25f), TransitionGateNames.ww01, TransitionGateNames.rWyrm);
+            CreateDreamGateway("Dream Enter", new Vector2(13.0f, 8.0f), new Vector2(5.25f, 5.25f), TransitionGateNames.Ww01, TransitionGateNames.RWyrm);
             // x=18.5
-            GameObject ddr = GameObject.Instantiate(PrefabHolder.a05DDR);
-            ddr.name = TransitionGateNames.rw_ww01;
+            GameObject ddr = Instantiate(PrefabHolder.A05Ddr);
+            ddr.name = TransitionGateNames.RwWw01;
             ddr.SetActive(true);
             ddr.transform.position = new Vector3(18.5f, 6.87f, 0.2f);
-            GameObject ddrr = GameObject.Instantiate(PrefabHolder.a05DDRR);
-            ddrr.name = TransitionGateNames.rw_ww01_2;
+            GameObject ddrr = Instantiate(PrefabHolder.A05Ddrr);
+            ddrr.name = TransitionGateNames.RwWw012;
             ddrr.SetActive(true);
             ddrr.transform.position = new Vector3(18.5f, 6.87f, 0.2f);
 
@@ -309,12 +307,12 @@ namespace DreamKing
         {
             Log("!Misc");
             #region Area Title Controller
-            GameObject tmpPMU2D = GameObject.Instantiate(PrefabHolder.popPmU2dPrefab, scene.GetRootGameObjects()[6].transform);
-            tmpPMU2D.SetActive(true);
-            tmpPMU2D.name = "PlayMaker Unity 2D";
-            if (scene.name == TransitionGateNames.ww01)
+            GameObject tmpPmu2D = Instantiate(PrefabHolder.PopPmU2dPrefab, scene.GetRootGameObjects()[6].transform);
+            tmpPmu2D.SetActive(true);
+            tmpPmu2D.name = "PlayMaker Unity 2D";
+            if (scene.name == TransitionGateNames.Ww01)
             {
-                GameObject atc = GameObject.Instantiate(PrefabHolder.popAreaTitleCtrlPrefab);
+                GameObject atc = Instantiate(PrefabHolder.PopAreaTitleCtrlPrefab);
                 atc.SetActive(true);
                 atc.transform.localPosition = Vector3.zero;
                 atc.transform.localEulerAngles = Vector3.zero;
@@ -328,11 +326,11 @@ namespace DreamKing
                 atcFsm.FsmVariables.GetFsmBool("Display Right").Value = false;
                 atcFsm.FsmVariables.GetFsmBool("Only On Revisit").Value = false;
                 atcFsm.FsmVariables.GetFsmBool("Sub Area").Value = false;
-                atcFsm.FsmVariables.GetFsmBool("Visited Area").Value = DreamKing.Instance._saveSettings.SfGrenadeDreamKingVisitedWhiteWastes;
+                atcFsm.FsmVariables.GetFsmBool("Visited Area").Value = DreamKing.Instance.SaveSettings.SfGrenadeDreamKingVisitedWhiteWastes;
                 atcFsm.FsmVariables.GetFsmBool("Wait for Trigger").Value = false;
 
-                atcFsm.FsmVariables.GetFsmString("Area Event").Value = Consts.LanguageStrings.WwAreaTitle_Event;
-                atcFsm.FsmVariables.GetFsmString("Visited Bool").Value = nameof(DreamKing.Instance._saveSettings.SfGrenadeDreamKingVisitedWhiteWastes);
+                atcFsm.FsmVariables.GetFsmString("Area Event").Value = Consts.LanguageStrings.WwAreaTitleEvent;
+                atcFsm.FsmVariables.GetFsmString("Visited Bool").Value = nameof(DreamKing.Instance.SaveSettings.SfGrenadeDreamKingVisitedWhiteWastes);
 
                 atcFsm.FsmVariables.GetFsmGameObject("Area Title").Value = GameObject.Find("Area Title");
 
@@ -340,14 +338,14 @@ namespace DreamKing
 
                 atc.AddComponent<NonBouncer>();
 
-                DreamKing.Instance._saveSettings.SfGrenadeDreamKingVisitedWhiteWastes = true;
+                DreamKing.Instance.SaveSettings.SfGrenadeDreamKingVisitedWhiteWastes = true;
             }
             #endregion
 
             #region Scene Manager
-            if (scene.name == TransitionGateNames.ww01)
+            if (scene.name == TransitionGateNames.Ww01)
             {
-                GameObject tmp = GameObject.Instantiate(PrefabHolder.popSceneManagerPrefab);
+                GameObject tmp = Instantiate(PrefabHolder.PopSceneManagerPrefab);
                 tmp.name = "_SceneManager";
                 tmp.SetActive(true);
                 var sm = tmp.GetComponent<SceneManager>();
@@ -362,9 +360,9 @@ namespace DreamKing
                 sm.defaultIntensity = 0.968f;
                 sm.heroLightColor = new Color(0.904412f, 0.785627f, 0.658359f, 0.678f);
             }
-            else if (scene.name == TransitionGateNames.ww02)
+            else if (scene.name == TransitionGateNames.Ww02)
             {
-                GameObject tmp = GameObject.Instantiate(PrefabHolder.popSceneManagerPrefab);
+                GameObject tmp = Instantiate(PrefabHolder.PopSceneManagerPrefab);
                 tmp.name = "_SceneManager";
                 tmp.SetActive(true);
                 var sm = tmp.GetComponent<SceneManager>();
@@ -423,7 +421,7 @@ namespace DreamKing
                     }
                     catch (Exception ex)
                     {
-                        Log("PatchDamageResetColliders - " + ex.ToString());
+                        Log("PatchDamageResetColliders - " + ex);
                     }
                 }
             }
@@ -519,18 +517,18 @@ namespace DreamKing
             {
                 var apb = scene.FindRoot("Audio Player Blizzard");
                 var apbFsm = apb.LocateMyFSM("Play");
-                apbFsm.GetAction<PlayerDataBoolTest>("State 1", 0).boolName = nameof(DreamKing.Instance._saveSettings.SfGrenadeDreamKingOwnOutskirtsBlizzard);
+                apbFsm.GetAction<PlayerDataBoolTest>("State 1", 0).boolName = nameof(DreamKing.Instance.SaveSettings.SfGrenadeDreamKingOwnOutskirtsBlizzard);
                 apbFsm.SetState("Pause");
 
                 var apbw = scene.FindRoot("Audio Player Blizzard Wyrm");
                 var apbwFsm = apbw.LocateMyFSM("Play");
-                apbwFsm.GetAction<PlayerDataBoolTest>("State 1", 0).boolName = nameof(DreamKing.Instance._saveSettings.SfGrenadeDreamKingOwnOutskirtsBlizzard);
+                apbwFsm.GetAction<PlayerDataBoolTest>("State 1", 0).boolName = nameof(DreamKing.Instance.SaveSettings.SfGrenadeDreamKingOwnOutskirtsBlizzard);
                 apbwFsm.SetState("Pause");
 
                 var wap = scene.FindRoot("white_ash_particles");
                 wap.LocateMyFSM("Control").SendEvent("DRIFT END");
                 var wapFsm = wap.LocateMyFSM("Control2");
-                wapFsm.GetAction<PlayerDataBoolTest>("Init", 3).boolName = nameof(DreamKing.Instance._saveSettings.SfGrenadeDreamKingOwnOutskirtsBlizzard);
+                wapFsm.GetAction<PlayerDataBoolTest>("Init", 3).boolName = nameof(DreamKing.Instance.SaveSettings.SfGrenadeDreamKingOwnOutskirtsBlizzard);
                 wapFsm.SetState("Pause");
 
                 var bs = scene.FindRoot("Battle Scene");
@@ -540,22 +538,22 @@ namespace DreamKing
 
                 var bp = scene.Find("blizzard_particles");
                 var bpFsm = bp.LocateMyFSM("Control");
-                bpFsm.GetAction<PlayerDataBoolTest>("Init", 3).boolName = nameof(DreamKing.Instance._saveSettings.SfGrenadeDreamKingOwnOutskirtsBlizzard);
+                bpFsm.GetAction<PlayerDataBoolTest>("Init", 3).boolName = nameof(DreamKing.Instance.SaveSettings.SfGrenadeDreamKingOwnOutskirtsBlizzard);
                 bpFsm.SetState("Pause");
 
                 var bp1 = scene.Find("blizzard_particles (1)");
                 var bp1Fsm = bp1.LocateMyFSM("Control");
-                bp1Fsm.GetAction<PlayerDataBoolTest>("Init", 3).boolName = nameof(DreamKing.Instance._saveSettings.SfGrenadeDreamKingOwnOutskirtsBlizzard);
+                bp1Fsm.GetAction<PlayerDataBoolTest>("Init", 3).boolName = nameof(DreamKing.Instance.SaveSettings.SfGrenadeDreamKingOwnOutskirtsBlizzard);
                 bp1Fsm.SetState("Pause");
 
                 var bp2 = scene.Find("blizzard_particles (2)");
                 var bp2Fsm = bp2.LocateMyFSM("Control");
-                bp2Fsm.GetAction<PlayerDataBoolTest>("Init", 3).boolName = nameof(DreamKing.Instance._saveSettings.SfGrenadeDreamKingOwnOutskirtsBlizzard);
+                bp2Fsm.GetAction<PlayerDataBoolTest>("Init", 3).boolName = nameof(DreamKing.Instance.SaveSettings.SfGrenadeDreamKingOwnOutskirtsBlizzard);
                 bp2Fsm.SetState("Pause");
 
                 var bp3 = scene.Find("blizzard_particles (3)");
                 var bp3Fsm = bp3.LocateMyFSM("Control");
-                bp3Fsm.GetAction<PlayerDataBoolTest>("Init", 3).boolName = nameof(DreamKing.Instance._saveSettings.SfGrenadeDreamKingOwnOutskirtsBlizzard);
+                bp3Fsm.GetAction<PlayerDataBoolTest>("Init", 3).boolName = nameof(DreamKing.Instance.SaveSettings.SfGrenadeDreamKingOwnOutskirtsBlizzard);
                 bp3Fsm.SetState("Pause");
             }
             else if (scene.name == "Room_Wyrm")
@@ -564,7 +562,7 @@ namespace DreamKing
                 scene.FindRoot("Audio Rumble Cave In").SetActive(false);
                 scene.FindRoot("Avalanche End").SetActive(false);
                 var activateFsm = scene.FindRoot("Avalanche").LocateMyFSM("Activate");
-                activateFsm.GetAction<PlayerDataBoolTest>("Idle", 1).boolName = nameof(DreamKing.Instance._saveSettings.SfGrenadeDreamKingOwnOutskirtsBlizzard);
+                activateFsm.GetAction<PlayerDataBoolTest>("Idle", 1).boolName = nameof(DreamKing.Instance.SaveSettings.SfGrenadeDreamKingOwnOutskirtsBlizzard);
                 activateFsm.SetState("Pause");
                 scene.FindRoot("blizzard_particles").LocateMyFSM("Stop").SetState("Stop");
                 scene.FindRoot("blizzard_particles").SetActive(false);
@@ -599,7 +597,7 @@ namespace DreamKing
             Log("!CreateBreakableWall");
             //SFGrenadeDreamKing_TotOpened
 
-            GameObject breakableWall = GameObject.Instantiate(PrefabHolder.breakableWallPrefab);
+            GameObject breakableWall = Instantiate(PrefabHolder.BreakableWallPrefab);
             breakableWall.SetActive(true);
             breakableWall.name = name;
             breakableWall.transform.position = pos;
@@ -654,7 +652,7 @@ namespace DreamKing
 
             // a05DE2 = Abyss_05 -> Dusk Knight/Dream Enter 2
             // a05IdlePT = Abyss_05 -> Dusk Knight/Idle Pt
-            GameObject dreamEnter = GameObject.Instantiate(PrefabHolder.a05DE2);
+            GameObject dreamEnter = Instantiate(PrefabHolder.A05De2);
             dreamEnter.name = gateName;
             dreamEnter.SetActive(true);
             dreamEnter.transform.position = pos;
@@ -673,13 +671,13 @@ namespace DreamKing
                 }
             }
 
-            GameObject dreamPT = GameObject.Instantiate(PrefabHolder.a05IdlePT);
-            dreamPT.SetActive(true);
-            dreamPT.transform.position = new Vector3(pos.x, pos.y, -0.002f);
-            dreamPT.transform.localScale = Vector3.one;
-            dreamPT.transform.eulerAngles = Vector3.zero;
+            GameObject dreamPt = Instantiate(PrefabHolder.A05IdlePt);
+            dreamPt.SetActive(true);
+            dreamPt.transform.position = new Vector3(pos.x, pos.y, -0.002f);
+            dreamPt.transform.localScale = Vector3.one;
+            dreamPt.transform.eulerAngles = Vector3.zero;
 
-            var shape = dreamPT.GetComponent<ParticleSystem>().shape;
+            var shape = dreamPt.GetComponent<ParticleSystem>().shape;
             shape.scale = new Vector3(size.x, size.y, 0.001f);
 
             Log("~DreamGateway");
@@ -687,7 +685,7 @@ namespace DreamKing
 
         private void CreateBench(string benchName, Vector3 pos, string sceneName)
         {
-            GameObject bench = GameObject.Instantiate(PrefabHolder.whiteBenchPrefab);
+            GameObject bench = Instantiate(PrefabHolder.WhiteBenchPrefab);
             bench.SetActive(true);
             bench.transform.position = pos;
             bench.name = benchName;
@@ -696,7 +694,7 @@ namespace DreamKing
             benchFsm.FsmVariables.FindFsmString("Spawn Name").Value = benchName;
         }
 
-        private void printDebug(GameObject go, string tabindex = "")
+        private void PrintDebug(GameObject go, string tabindex = "")
         {
             Log(tabindex + "Name: " + go.name);
             foreach (var comp in go.GetComponents<Component>())
@@ -705,24 +703,24 @@ namespace DreamKing
             }
             for (int i = 0; i < go.transform.childCount; i++)
             {
-                printDebug(go.transform.GetChild(i).gameObject, tabindex + "\t");
+                PrintDebug(go.transform.GetChild(i).gameObject, tabindex + "\t");
             }
         }
 
         private void Log(String message)
         {
-            Logger.Log($"[{this.GetType().FullName.Replace(".", "]:[")}] - {message}");
+            Logger.Log($"[{GetType().FullName.Replace(".", "]:[")}] - {message}");
         }
         private void Log(System.Object message)
         {
-            Logger.Log($"[{this.GetType().FullName.Replace(".", "]:[")}] - {message.ToString()}");
+            Logger.Log($"[{GetType().FullName.Replace(".", "]:[")}] - {message}");
         }
 
         private static void SetInactive(GameObject go)
         {
             if (go != null)
             {
-                UnityEngine.Object.DontDestroyOnLoad(go);
+                DontDestroyOnLoad(go);
                 go.SetActive(false);
             }
         }
@@ -730,7 +728,7 @@ namespace DreamKing
         {
             if (go != null)
             {
-                UnityEngine.Object.DontDestroyOnLoad(go);
+                DontDestroyOnLoad(go);
             }
         }
     }

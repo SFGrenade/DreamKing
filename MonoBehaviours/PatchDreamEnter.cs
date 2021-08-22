@@ -6,17 +6,17 @@ namespace DreamKing.MonoBehaviours
 {
     public class PatchDreamEnter : MonoBehaviour
     {
-        public string EnterDoorName = TransitionGateNames.ww01_rw;
+        public string EnterDoorName = TransitionGateNames.Ww01Rw;
         public Vector2 EnterPosition = GameObject.Find("d-oor1").transform.position;
 
         public void Start()
         {
-            GameObject door1 = GameObject.Instantiate(PrefabHolder.wp03Door);
+            GameObject door1 = Instantiate(PrefabHolder.Wp03Door);
             door1.SetActive(true);
             door1.name = EnterDoorName;
             door1.transform.position = EnterPosition;
 
-            GameObject dreamEntry = GameObject.Instantiate(PrefabHolder.wp03Dream);
+            GameObject dreamEntry = Instantiate(PrefabHolder.Wp03Dream);
             dreamEntry.SetActive(true);
             dreamEntry.name = "Dream Entry";
             dreamEntry.transform.position = Vector3.zero;
