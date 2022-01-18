@@ -1,0 +1,50 @@
+{
+  "DE": {
+  },
+  "EN": {
+    "UI": {
+      "SFGrenadeDreamKing_Shovel1NameConvo": "Pale Shovel",
+      "SFGrenadeDreamKing_Shovel1DescConvo": "This shovel is made out of Pale Ore.<br>Cornifer found it in the Queen's Gardnens.<br>Important for digging.",
+      "SFGrenadeDreamKing_Shovel2NameConvo": "Adventurer's Shovel",
+      "SFGrenadeDreamKing_Shovel2DescConvo": "This is essential if you want to dig your way through chunks of dust!<br>Cornifer said that the Kingdom's Edge is filled with that stuff."
+    },
+    "Achievements": {
+      "SFGrenadeDreamKing_Achievement_Title_BoughtShovel1": "First one wins!",
+      "SFGrenadeDreamKing_Achievement_Text_BoughtShovel1": "This is so much better than the other one",
+      "SFGrenadeDreamKing_Achievement_Title_BoughtShovel2": "Best comes last!",
+      "SFGrenadeDreamKing_Achievement_Text_BoughtShovel2": "This is so much better than the other one",
+      "SFGrenadeDreamKing_Achievement_Title_EnterLostDreams": "Enter lost dreams",
+      "SFGrenadeDreamKing_Achievement_Text_EnterLostDreams": "Enter the dreams of Hallownest's lost king",
+      "SFGrenadeDreamKing_Achievement_Title_DefeatedPaleWyrm": "Gaze of the Wyrm",
+      "SFGrenadeDreamKing_Achievement_Text_DefeatedPaleWyrm": "Defeat the Pale Wyrm",
+      "SFGrenadeDreamKing_Achievement_Title_DefeatedPaleNosk": "Pale Nosk",
+      "SFGrenadeDreamKing_Achievement_Text_DefeatedPaleNosk": "Defeat Pale Nosk"
+    },
+    "Titles": {
+      "SFGrenadeDreamKing_WwAreaTitle_SUPER": "",
+      "SFGrenadeDreamKing_WwAreaTitle_MAIN": "White Wastes",
+      "SFGrenadeDreamKing_WwAreaTitle_SUB": ""
+    },
+    "MISC": {
+      "SFGrenadeDreamKing_WwAreaTitle": "SFGrenadeDreamKing_WwAreaTitle",
+      "SFGrenadeDreamKing_PaleWyrmName": "Pale Wyrm",
+      "SFGrenadeDreamKing_PaleNoskName": "Pale Nosk"
+    }
+  },
+  "ES": {
+  },
+  "FR": {
+  },
+  "IT": {
+  },
+  "JA": {
+  },
+  "KO": {
+  },
+  "PT": {
+  },
+  "RU": {
+  },
+  "ZH": {
+  }
+}
