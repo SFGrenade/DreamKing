@@ -28,7 +28,7 @@ namespace DreamKing
     public class SceneChanger : MonoBehaviour
     {
         private static bool _debug = true;
-        private static string _abPath = "E:\\Github_Projects\\DreamKing Assets\\Assets\\AssetBundles\\";
+        private static string _abPath = "E:\\Documents\\Projects\\Unity Projects\\DreamKing Assets\\Assets\\AssetBundles\\";
 
         public AssetBundle AbOverallMat { get; private set; } = null;
         public AssetBundle AbWwScene { get; private set; } = null;
@@ -293,7 +293,7 @@ namespace DreamKing
 
             GameManager.instance.StartCoroutine(PatchCameraLockAreas(scene));
         }
-        
+
         public void CR_Change_WW02(Scene scene)
         {
             Log("CR_Change_WW02()");
