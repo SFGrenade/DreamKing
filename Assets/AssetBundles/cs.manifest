@@ -1,0 +1,51 @@
+ManifestFileVersion: 0
+CRC: 1889386930
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 09744d49a59186f6af229367a9698152
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5ad585dd02dfb5016c0dad519eab8f49
+HashAppended: 0
+ClassTypes:
+- Class: 49
+  Script: {instanceID: 0}
+Assets:
+- Assets/Languages/CS_Hunter.txt
+- Assets/Languages/CS_CP2.txt
+- Assets/Languages/CS_Cornifer.txt
+- Assets/Languages/CS_Sly.txt
+- Assets/Languages/CS_Zote.txt
+- Assets/Languages/CS_Hornet.txt
+- Assets/Languages/CS_Charm Slug.txt
+- Assets/Languages/CS_Elderbug.txt
+- Assets/Languages/CS_Map Zones.txt
+- Assets/Languages/CS_Journal.txt
+- Assets/Languages/CS_Banker.txt
+- Assets/Languages/CS_Ghosts.txt
+- Assets/Languages/CS_Backer Messages.txt
+- Assets/Languages/CS_Enemy Dreams.txt
+- Assets/Languages/CS_Achievements.txt
+- Assets/Languages/CS_Minor NPC.txt
+- Assets/Languages/CS_Shaman.txt
+- Assets/Languages/CS_Jiji.txt
+- Assets/Languages/CS_UI.txt
+- Assets/Languages/CS_Prices.txt
+- Assets/Languages/CS_Nailmasters.txt
+- Assets/Languages/CS_General.txt
+- Assets/Languages/CS_Dreamers.txt
+- Assets/Languages/CS_Lore Tablets.txt
+- Assets/Languages/CS_Prompts.txt
+- Assets/Languages/CS_CP3.txt
+- Assets/Languages/CS_StagMenu.txt
+- Assets/Languages/CS_Credits List.txt
+- Assets/Languages/CS_Dream Witch.txt
+- Assets/Languages/CS_Titles.txt
+- Assets/Languages/CS_Stag.txt
+- Assets/Languages/CS_Nailsmith.txt
+- Assets/Languages/CS_Relic Dealer.txt
+- Assets/Languages/CS_Quirrel.txt
+- Assets/Languages/CS_Iselda.txt
+- Assets/Languages/CS_MainMenu.txt
+Dependencies: []

@@ -1,0 +1,17 @@
+ManifestFileVersion: 0
+CRC: 2187342488
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 5b973f2df809bf4b13f6f814e5bb3a55
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 31d6cfe0d16ae931b73c59d7e0c089c0
+HashAppended: 0
+ClassTypes: []
+Assets:
+- Assets/Scenes/SF_DK_Dream_Outskirts_02.unity
+- Assets/Scenes/SF_DK_Dream_Outskirts_01.unity
+Dependencies:
+- E:/Github_Projects/DreamKing Assets/Assets/AssetBundles/white_wastes_materials
+- E:/Github_Projects/DreamKing Assets/Assets/AssetBundles/overall_materials_ww

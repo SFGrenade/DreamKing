@@ -1,0 +1,94 @@
+ManifestFileVersion: 0
+CRC: 1736452416
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 86c781e40fa45b1427d3f2b7470ac754
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 64c9f36af786f839ff1f546164667875
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Materials/White Wastes/Bone_Deep_08.png
+- Assets/Materials/White Wastes/Ash_Chunk_04.png
+- Assets/Materials/White Wastes/Stalactite_01.png
+- Assets/Materials/White Wastes/Ash_Chunk_01.png
+- Assets/Materials/White Wastes/Bone_Deep_02.png
+- Assets/Meshes/WW02/WW02 Chunk 0 3.obj
+- Assets/Materials/White Wastes/Deep_Tree_S.png
+- Assets/Materials/White Wastes/Ash_Chunk_02.png
+- Assets/Materials/White Wastes/Deep_Single_01.png
+- Assets/Materials/White Wastes/Bone_Deep_11.png
+- Assets/Meshes/WW01/WW01 Chunk 3 2.obj
+- Assets/Materials/Materials/Particle_Dream.mat
+- Assets/Materials/White Wastes/Stalactite_Set_01.png
+- Assets/Materials/White Wastes/Bone_Deep_09.png
+- Assets/Materials/White Wastes/GG_Cloud_03.png
+- Assets/Meshes/WW01/WW01 Chunk 1 1.obj
+- Assets/Meshes/WW01/WW01 Chunk 2 1.obj
+- Assets/Materials/White Wastes/Spike_02.png
+- Assets/Materials/White Wastes/Roof_03.png
+- Assets/Meshes/WW02/WW02 Chunk 1 3.obj
+- Assets/Materials/White Wastes/Bone_Deep_04.png
+- Assets/Materials/Particles/Particle_Lift_Dust.png
+- Assets/Materials/White Wastes/Ash_Chunk_03.png
+- Assets/Meshes/WW02/WW02 Chunk 1 1.obj
+- Assets/Materials/White Wastes/Bone_Deep_07.png
+- Assets/Meshes/WW02/WW02 Chunk 0 1.obj
+- Assets/Materials/White Wastes/Spike_01.png
+- Assets/Materials/Particles/Particle_Dream.png
+- Assets/Meshes/WW02/WW02 Chunk 1 2.obj
+- Assets/Materials/White Wastes/Bone_Deep_01.png
+- Assets/Materials/White Wastes/GG_Cloud_02.png
+- Assets/Meshes/WW01/WW01 Chunk 1 2.obj
+- Assets/Materials/White Wastes/dream_nail_base.png
+- Assets/Materials/White Wastes/Deep_Tree_M.png
+- Assets/Meshes/WW01/WW01 Chunk 3 1.obj
+- Assets/Meshes/WW01/WW01 Chunk 3 0.obj
+- Assets/Materials/White Wastes/Deep_Fog_01.png
+- Assets/Materials/White Wastes/Bone_Deep_05.png
+- Assets/Materials/White Wastes/Deep_Tree_L.png
+- Assets/Meshes/WW01/WW01 Chunk 0 0.obj
+- Assets/Meshes/WW02/WW02 Chunk 0 0.obj
+- Assets/Materials/White Wastes/Bone_Deep_06.png
+- Assets/Meshes/WW01/WW01 Chunk 1 0.obj
+- Assets/Meshes/WW01/WW01 Chunk 0 1.obj
+- Assets/Meshes/WW01/WW01 Chunk 0 2.obj
+- Assets/Materials/White Wastes/Spike_03.png
+- Assets/Materials/White Wastes/Shell_01.png
+- Assets/Materials/White Wastes/Roof_01.png
+- Assets/Meshes/WW01/WW01 Chunk 2 2.obj
+- Assets/Materials/White Wastes/Deep_Back_01.png
+- Assets/Materials/White Wastes/Roof_02.png
+- Assets/Materials/Materials/Black Material.mat
+- Assets/Materials/White Wastes/Ash_Chunk_05.png
+- Assets/Materials/White Wastes/Bone_Deep_03.png
+- Assets/Materials/White Wastes/Deep_Back_02.png
+- Assets/Materials/Materials/Particle_Lift_Dust.mat
+- Assets/Meshes/WW02/WW02 Chunk 0 2.obj
+- Assets/Meshes/WW02/WW02 Chunk 1 0.obj
+- Assets/Meshes/WW01/WW01 Chunk 2 0.obj
+- Assets/Materials/White Wastes/Bone_Deep_10.png
+- Assets/Materials/White Wastes/Shell_03.png
+- Assets/Materials/White Wastes/GG_Cloud_01.png
+- Assets/Materials/White Wastes/Shell_02.png
+Dependencies: []

@@ -1,0 +1,38 @@
+ManifestFileVersion: 0
+CRC: 1892681482
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 1726fd4875a1a25bd02763a6ff696fa6
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 041c8d05cc365791be3396b0501d1bff
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 83
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Overall_WW/Full Tile ww.png
+- Assets/Meshes/Overall/custom_plane.obj
+- Assets/Overall_WW/Black Tile ww.png
+- Assets/Overall_WW/Rawstyle_Test_3.wav
+- Assets/Overall_WW/Fade Tile ww.png
+Dependencies: []

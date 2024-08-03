@@ -1,0 +1,18 @@
+ManifestFileVersion: 0
+CRC: 1940394697
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: white_wastes_scenes
+      Dependencies:
+        Dependency_0: white_wastes_materials
+        Dependency_1: overall_materials_ww
+    Info_1:
+      Name: white_wastes_materials
+      Dependencies: {}
+    Info_2:
+      Name: overall_materials_ww
+      Dependencies: {}
+    Info_3:
+      Name: cs
+      Dependencies: {}
