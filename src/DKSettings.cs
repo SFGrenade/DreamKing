@@ -1,25 +1,24 @@
-﻿namespace DreamKing
-{
-    public class DkSaveSettings
-    {
-        // Start Mod Quest
-        public bool SfGrenadeDreamKingStartQuest = false;
-        // Shop Items
-        public bool SfGrenadeDreamKingShopShovel1 = false;
-        public bool SfGrenadeDreamKingShopShovel2 = false;
-        public bool SfGrenadeDreamKingBoughtShovel1 = false;
-        public bool SfGrenadeDreamKingBoughtShovel2 = false;
-        // Mechanics
-        public bool SfGrenadeDreamKingOwnOutskirtsBlizzard = false;
-        // Bosses
-        public bool SfGrenadeDreamKingDefeatedPaleWyrm = false;
-        public bool SfGrenadeDreamKingDefeatedPaleNosk = false;
-        // Areas
-        public bool SfGrenadeDreamKingOpenedAshGrave = false;
-        public bool SfGrenadeDreamKingVisitedWhiteWastes = false;
-    }
+﻿namespace DreamKing;
 
-    public class DkGlobalSettings
-    {
-    }
+public class DkSaveSettings
+{
+    // Start Mod Quest
+    public bool SfGrenadeDreamKingStartQuest = false;
+    // Shop Items
+    public bool SfGrenadeDreamKingShopShovel1 = false;
+    public bool SfGrenadeDreamKingShopShovel2 = false;
+    public bool SfGrenadeDreamKingBoughtShovel1 = false;
+    public bool SfGrenadeDreamKingBoughtShovel2 = false;
+    // Mechanics
+    public bool SfGrenadeDreamKingOwnOutskirtsBlizzard = false;
+    // Bosses
+    public bool SfGrenadeDreamKingDefeatedPaleWyrm = false;
+    public bool SfGrenadeDreamKingDefeatedPaleNosk = false;
+    // Areas
+    public bool SfGrenadeDreamKingOpenedAshGrave = false;
+    public bool SfGrenadeDreamKingVisitedWhiteWastes = false;
+}
+
+public class DkGlobalSettings
+{
 }
