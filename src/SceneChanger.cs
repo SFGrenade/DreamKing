@@ -27,7 +27,7 @@ enum EnviromentType
 public class SceneChanger : MonoBehaviour
 {
     private static bool _debug = true;
-    private static string _abPath = "E:\\Documents\\Projects\\Unity Projects\\DreamKing Assets\\Assets\\AssetBundles\\";
+    private static string _abPath = "C:\\Users\\SFG\\Documents\\Projects\\Unity Projects\\DreamKing Assets\\Assets\\AssetBundles\\";
 
     public AssetBundle AbOverallMat { get; private set; } = null;
     public AssetBundle AbWwScene { get; private set; } = null;
